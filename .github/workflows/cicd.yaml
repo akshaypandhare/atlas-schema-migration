@@ -1,0 +1,30 @@
+name: Image Build, Publish and deploy in QA or Production env.
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**/README.md'
+      - '**/cicd.yaml'
+jobs:
+
+  job-1:
+    name: "Build"
+    runs-on: [self-hosted, dev-assaya-runner]
+    steps:
+
+      - name: "Setup - Checkout"
+        uses: actions/checkout@v2.1.0
+        with:
+          fetch-depth: 0
+
+      - name: apply schema changes to QA databse
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+              cd qa/
+              terraform init
+              terraform apply
+

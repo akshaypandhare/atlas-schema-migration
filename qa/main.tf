@@ -5,6 +5,11 @@ terraform {
       version = "~> 0.4"
     }
   }
+  backend "s3" {
+    bucket = "assaya-terraform-state"
+    key    = "infra/dev/sa-east-1/RDS/schema-migration/terraform.tf"
+    region = "sa-east-1"
+  }
 }
 
 provider "atlas" {}
