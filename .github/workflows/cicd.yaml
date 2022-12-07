@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '**/README.md'
-      - '**/cicd.yaml'
+      
 jobs:
 
   job-1:
