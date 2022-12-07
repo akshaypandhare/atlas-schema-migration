@@ -25,5 +25,9 @@ resource "atlas_migration" "openbio" {
   url              = data.atlas_migration.openbio.url
   revisions_schema = data.atlas_migration.openbio.revisions_schema
   version          = data.atlas_migration.openbio.latest
-  dev_url          = "postgres://assaya:assaya@18.230.122.5:5432/migrate?sslmode=disable"
+  dev_url          = var.dev_url
+}
+
+variable "dev_url" {
+    type = string
 }
