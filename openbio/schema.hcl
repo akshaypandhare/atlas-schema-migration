@@ -60,6 +60,40 @@ table "api_keys" {
     columns = [column.id]
   }
 }
+table "comments" {
+  schema = schema.public
+  column "id" {
+    null = false
+    type = bigserial
+  }
+  column "post_id" {
+    null = false
+    type = bigint
+  }
+  column "user_id" {
+    null = false
+    type = bigint
+  }
+  column "body" {
+    null = false
+    type = character_varying
+  }
+  primary_key {
+    columns = [column.id]
+  }
+  foreign_key "comments_post_id_fkey" {
+    columns     = [column.post_id]
+    ref_columns = [table.posts.column.id]
+    on_update   = NO_ACTION
+    on_delete   = NO_ACTION
+  }
+  foreign_key "comments_user_id_fkey" {
+    columns     = [column.user_id]
+    ref_columns = [table.users.column.id]
+    on_update   = NO_ACTION
+    on_delete   = NO_ACTION
+  }
+}
 table "countries" {
   schema = schema.public
   column "id" {
