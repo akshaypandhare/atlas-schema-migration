@@ -11,7 +11,7 @@ jobs:
 
   job-1:
     name: "Build"
-    runs-on: [self-hosted, dev-assaya-runner]
+    runs-on: [self-hosted, Schema_migrate, Linux]
     steps:
 
       - name: "Setup - Checkout"
