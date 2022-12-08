@@ -11,7 +11,7 @@ jobs:
   job-1:
     name: "QA-Plan"
     runs-on: [self-hosted, Schema_migrate, Linux]
-    if: github.ref == 'refs/heads/qa'
+    if: github.ref == 'refs/heads/main'
     services:
       postgres:
         image: postgres
@@ -43,7 +43,7 @@ jobs:
   job-2:
     name: "PROD-Plan"
     runs-on: [self-hosted, Schema_migrate, Linux]
-    if: github.ref == 'refs/heads/production'
+    if: github.ref == 'refs/heads/qa'
     services:
       postgres:
         image: postgres
