@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket = "assaya-terraform-state"
-    key    = "infra/dev/sa-east-1/RDS/schema-migration/terraform.tf"
+    key    = "infra/dev/sa-east-1/RDS/schema-migration-prod/terraform.tf"
     region = "sa-east-1"
   }
 }
@@ -24,7 +24,7 @@ resource "atlas_migration" "openbio" {
   dir              = data.atlas_migration.openbio.dir
   url              = data.atlas_migration.openbio.url
   revisions_schema = data.atlas_migration.openbio.revisions_schema
-  version          = data.atlas_migration.openbio.latest
+  version          = "20221208035936"
   dev_url          = var.dev_url
 }
 

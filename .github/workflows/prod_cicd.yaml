@@ -3,7 +3,7 @@ name: Terraform init and apply
 on:
   push:
     branches:
-      - main
+      - production123
       
 jobs:
 
@@ -29,11 +29,11 @@ jobs:
         uses: actions/checkout@v2.1.0
         with:
           fetch-depth: 0
-      - name: apply schema changes to QA databse
+      - name: apply schema changes to PROD databse
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-              cd qa/
+              cd prod/
               terraform init
-              terraform apply -var dev_url="postgres://assaya:assaya@localhost:5432/migrate?sslmode=disable" --auto-approve
+              terraform apply -var dev_url="postgres://assaya:assaya@localhost:5432/migrate?sslmode=disable" -var url="${{ secrets.PROD_DB_URL }}" --auto-approve
