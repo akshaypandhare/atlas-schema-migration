@@ -3,7 +3,7 @@ name: Terraform init and apply
 on:
   push:
     branches:
-      - main
+      - qa
       
 jobs:
 
@@ -36,4 +36,4 @@ jobs:
         run: |
               cd qa/
               terraform init
-              terraform apply -var dev_url="postgres://assaya:assaya@localhost:5432/migrate?sslmode=disable" --auto-approve
+              terraform apply -var dev_url="postgres://assaya:assaya@localhost:5432/migrate?sslmode=disable" -var url="${{ secrets.QA_DB_URL }}" --auto-approve
