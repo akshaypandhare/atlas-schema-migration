@@ -767,24 +767,6 @@ table "organizations" {
     columns = [column.id]
   }
 }
-table "posts" {
-  schema = schema.public
-  column "id" {
-    null = false
-    type = bigserial
-  }
-  column "title" {
-    null = false
-    type = character_varying
-  }
-  column "body" {
-    null = false
-    type = character_varying
-  }
-  primary_key {
-    columns = [column.id]
-  }
-}
 table "resource_roles" {
   schema = schema.public
   column "id" {
