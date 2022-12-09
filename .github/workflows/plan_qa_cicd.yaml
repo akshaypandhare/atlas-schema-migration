@@ -1,0 +1,39 @@
+name: Terraform init and plan
+
+on:
+  pull_request:
+    branches:
+      - qa
+      
+jobs:
+
+  job-1:
+    name: "QA-Plan"
+    runs-on: [self-hosted, Schema_migrate, Linux]
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: assaya
+          POSTGRES_PASSWORD: assaya
+          POSTGRES_DB: migrate
+        ports:
+          - "5432:5432"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: "Setup - Checkout"
+        uses: actions/checkout@v2.1.0
+        with:
+          fetch-depth: 0
+      - name: Plan of  schema changes to QA databse
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+              cd qa/
+              terraform init
+              terraform plan -var dev_url="postgres://assaya:assaya@localhost:5432/migrate?sslmode=disable" -var url="${{ secrets.QA_DB_URL }}"
