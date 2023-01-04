@@ -24,7 +24,7 @@ resource "atlas_migration" "openbio" {
   dir              = data.atlas_migration.openbio.dir
   url              = data.atlas_migration.openbio.url
   revisions_schema = data.atlas_migration.openbio.revisions_schema
-  version          = "20221209042720"
+  version          = "20230104132413"
   dev_url          = var.dev_url
 }
 
